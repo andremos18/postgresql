@@ -82,12 +82,12 @@
    6948dc7760c1: Download complete 
    ```
 
-2. Создание контейнера с последующим запуском
+2. Создание контейнера с последующим запуском:
    ```
    docker run --name test_postgres -e POSTGRES_PASSWORD=postgres -d -p 5435:5432 -v /var/lib/postgres:/var/lib/postgresql/data postgres:17
    ```
 
-3. Подключаемся к бд
+3. Подключаемся к бд:
    ```
    psql -h localhost -p 5435 -U postgres -d postgres
    ```
@@ -96,8 +96,13 @@
 create table test (name varchar);
 insert into test values ('test1'), ('test2');
 ```
-5. Удаляем контейнер командами
+5. Удаляем контейнер ```test_postgres``` командами:
 ```
 docker stop test_postgres
 docker rm test_postgres
+```
+6. Проверяем отсутствие контейнера ```test_postgres``` командой:
+
+```
+docker container ls --all
 ```

@@ -2,10 +2,10 @@
 
 Рассмотрим разные варианты установки PostgreSQL
 
-## Установка на Ubuntu 
+## Установка на Ubuntu
 
-Есть система с уже установленным postgresql версии 14. 
-В учебных целях производим установку еще одного инстанса PostgreSQL версии 17.
+Рассмотрим установку PostgreSQL на Ubuntu.
+
 
 Далее описание этапов установки:
 
@@ -21,6 +21,10 @@
 ![/usr/share/postgresql-common/pgdg/apt.postgresql.org.sh](res/img_postgresql_orgs_sh.png)
 
 2. Параметры установки можно настроить в файле /etc/postgresql-common/createcluster.conf
+   Установим параметр
+   ```
+   create_main_cluster = false
+   ```
 3. Установка postgresql-17 командой
    ```
    apt install postgresql-17
@@ -39,17 +43,20 @@
    ```
    pg_lsclusters
    ```
-   И замечаем что кластера с postgres 17 отсутствует.
+   Видим что кластер с postgresql 17 отсутствует в списке. 
    ![pg_lsclusters](res/img_cluster_list.png)
+
 6. Создаем кластер main postgresql 17
    ```
    pg_createcluster 17 main
    pg_ctlcluster 17 main start
    ```
    ![pg_createcluster 17 main](res/img_create_cluster.png)
+
    ![pg_ctlcluster 17 main start](res/img_start_postgresql.png)
 
-7. Правим pg_hba.conf, добавляя разрешение подключаться с определенной ip-адреса, добавив строку:
+
+7. Правим pg_hba.conf, добавляя разрешение подключаться с определенной ip-адреса (например, 192.168.0.9), добавив строку:
   ```
    host    all             all             192.168.0.9/24          scram-sha-256
    ```

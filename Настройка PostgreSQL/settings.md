@@ -42,9 +42,11 @@ public | pgbench_tellers  | table | postgres
 
 Звпустили нагрузочное тестирование 
 
+```
 sudo -u postgres pgbench -p 5434 -c 50 -j 2 -P 10 -T 600 postgres
+```
 
-Получили результаты:
+Получили результаты
 
 ```
 transaction type: <builtin: TPC-B (sort of)>
@@ -88,9 +90,10 @@ sourcefile                | sourceline | seqno |      name      | setting | appl
 ```
 
 Выполняем перезапуск кластера
-
+```
 sudo pg_ctlcluster 17 main3 stop
 sudo pg_ctlcluster 17 main3 start
+```
 
 Проверяем применились ли параметры
 
@@ -104,9 +107,12 @@ postgres=# select * from pg_file_settings where name='shared_buffers';
 ```
 
 Выполняем тест повторно
-sudo -u postgres pgbench -p 5434 -c 50 -j 2 -P 10 -T 600 postgres
 
-Получаем результат с значтельно большим tps, чем предыдущий
+```
+sudo -u postgres pgbench -p 5434 -c 50 -j 2 -P 10 -T 600 postgres
+```
+
+Получаем результат с значительно лучшим tps
 
 ```
 transaction type: <builtin: TPC-B (sort of)>

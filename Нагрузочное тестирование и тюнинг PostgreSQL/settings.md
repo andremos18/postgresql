@@ -5,7 +5,7 @@
 Cоздали новый кластер
 
 ```
-sudo pg_createcluster 17 main3
+sudo pg_createcluster 15 main3
 ```
 
 Выполнили иициализацию pgbench стандартной конфигурации  (https://postgrespro.ru/docs/postgrespro/14/pgbench)
@@ -85,14 +85,14 @@ postgres=# select * from pg_file_settings where name='shared_buffers';
 
 sourcefile                | sourceline | seqno |      name      | setting | applied |            error             
 ------------------------------------------+------------+-------+----------------+---------+---------+------------------------------
-/etc/postgresql/17/main3/postgresql.conf |        129 |    11 | shared_buffers | 1024MB  | f       | setting could not be applied
+/etc/postgresql/15/main3/postgresql.conf |        129 |    11 | shared_buffers | 1024MB  | f       | setting could not be applied
 (1 row)
 ```
 
 Выполняем перезапуск кластера
 ```
-sudo pg_ctlcluster 17 main3 stop
-sudo pg_ctlcluster 17 main3 start
+sudo pg_ctlcluster 15 main3 stop
+sudo pg_ctlcluster 15 main3 start
 ```
 
 Проверяем применились ли параметры
@@ -101,7 +101,7 @@ sudo pg_ctlcluster 17 main3 start
 postgres=# select * from pg_file_settings where name='shared_buffers';
                 sourcefile                | sourceline | seqno |      name      | setting | applied | error 
 ------------------------------------------+------------+-------+----------------+---------+---------+-------
- /etc/postgresql/17/main3/postgresql.conf |        129 |    11 | shared_buffers | 1024MB  | t       | 
+ /etc/postgresql/15/main3/postgresql.conf |        129 |    11 | shared_buffers | 1024MB  | t       | 
 (1 row)
 
 ```

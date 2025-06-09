@@ -33,7 +33,7 @@
 Работу выполним на демонстрационной базе данных «Авиаперевозки» https://edu.postgrespro.ru/demo_small.zip. 
 
 Получим оценку плана выполнения запроса количество билетов на рейсы в 2016 году. Дя этого выполняем explain analyze.
-С параметром analyse команда explain на самом деле выполняет запрос, а затем выводит фактическое число строк и время выполнения, 
+С параметром analyse команда explain выполняет запрос, а затем выводит фактическое число строк и время выполнения, 
 накопленное в каждом узле плана, вместе с теми же оценками, что выдаёт обычная команда EXPLAIN.
 
 ```
@@ -45,7 +45,7 @@ where extract(year from f.scheduled_departure)=2016
 group by f.departure_airport , f.departure_airport
 ```
 
-Результат команда представлен ниже.
+Результат запроса представлен ниже:
 
 ```
 HashAggregate  (cost=22834.74..22835.57 rows=83 width=16) (actual time=258.899..258.907 rows=104 loops=1)
@@ -96,8 +96,8 @@ Execution Time: 218.281 ms
 
 ```
 create table reviews (
-id                  integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-content                varchar             not null
+id        integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+content   varchar not null
 );
 ```
 
@@ -116,7 +116,7 @@ insert into reviews(content) values
 CREATE INDEX idx_reviews_content ON reviews USING GIN (to_tsvector('russian', content));
 ``
 
-Выпоолним поиск отзывов в которорых упоминается слово "мопед":
+Выпоолним поиск отзывов в которых упоминается слово "мопед":
 
 ``
 SELECT * FROM reviews WHERE to_tsvector('russian', content) @@ to_tsquery('russian', 'мопед');
@@ -136,13 +136,13 @@ id |      content
 
 Работу выполним на демонстрационной базе данных «Авиаперевозки» https://edu.postgrespro.ru/demo_small.zip.
 Создадим частичный индекс на таблице flights по полю status:
-``
+```
 create index idx_flights_arrived on bookings.flights(status) where status = 'Arrived';
-``
+```
 Выполним анализ запроса:
-``
+```
 explain select count(1) from bookings.flights where status = 'Arrived';
-``
+```
 
 Убедились, что индекс используется:
 

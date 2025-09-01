@@ -1,0 +1,17 @@
+[Unit]
+Description=Prometheus PostgreSQL Exporter
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=postgres
+Group=postgres
+Environment=DATA_SOURCE_NAME="postgresql://postgresql_exporter:password@localhost:5432/people?sslmode=disable"
+ExecStart=/usr/local/bin/postgres_exporter
+
+[Install]
+WantedBy=multi-user.target
+
+
+sudo nano /etc/systemd/system/postgres-exporter.service

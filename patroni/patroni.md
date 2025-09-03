@@ -25,7 +25,7 @@
 В качестве точки входа используется виртуальный ip адрес (VIP). 
 Служба keepalived автоматически переключает VIP между серверами haproxy1 и haproxy2 
 
-| ноды     | ip адрес      | службы                    |
+| узел     | ip адрес      | службы                    |
 |----------|---------------|---------------------------|
 | pg0      | 192.168.0.90  | postgrsql, etcd, patroni  | 
 | pg1      | 192.168.0.91  | postgresql, etcd, patroni | 
@@ -444,12 +444,6 @@ https://habr.com/ru/companies/otus/articles/753294/
 sudo apt-get install keepalived
 ```
 
-https://support.indeed-company.ru/Knowledgebase/Article/View/balansirovshik-nagruzok-haproxy--keepalived#h_4476724411451679311258853
-
-
-
-
-
 В файл /etc/sysctl.conf и добавляем строки:
 ```
 net.ipv4.ip_forward=1
@@ -502,8 +496,3 @@ done in 0.16 s (drop tables 0.00 s, create tables 0.01 s, client-side generate 0
 ```
 sudo -u postgres pgbench -S -c 8 -P 6 -T 60 -U postgres postgres -p 5432
 ```
-
-```
-sudo -u postgres pgbench -p 5432 -c 50 -j 2 -P 10 -T 600 postgres
-```
-

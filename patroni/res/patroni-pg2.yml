@@ -17,7 +17,7 @@ bootstrap:
   dcs:
     ttl: 60
     loop_wait: 10
-    retry_timeout: 27
+    retry_timeout: 15
     maximum_lag_on_failover: 2048576
     master_start_timeout: 300
     synchronous_mode: true

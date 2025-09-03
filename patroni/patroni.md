@@ -324,6 +324,13 @@ curl -u "patroni:123"  -X PUT -H "Content-Type: application/json" -d '{"shared_b
 ETCDCTL_API=2 etcdctl get /service/postgres-cluster/config
 ```
 
+при изменении значений loop_wait , retry_timeout или ttl необходимо следовать правилу:
+```
+loop_wait + 2 * retry_timeout <= ttl
+```
+https://patroni.readthedocs.io/en/latest/dynamic_configuration.html
+
+
 ### Создание базы данных
 
 Подключимся к лидеру и создадим пользователя и базу данных:
